@@ -22,11 +22,11 @@ type SplitTest struct {
 }
 
 var (
-	m2  = uint64(2)
-	m1  = uint64(1)
-	m0  = uint64(0)
-	m_1 = ^uint64(0)     // -1 when signed.
-	m_2 = ^uint64(0) - 1 // -2 when signed.
+	m2    = uint64(2)
+	m1    = uint64(1)
+	m0    = uint64(0)
+	m1neg = ^uint64(0)     // -1 when signed.
+	m2neg = ^uint64(0) - 1 // -2 when signed.
 )
 
 var splitTests = []SplitTest{
@@ -44,9 +44,9 @@ var splitTests = []SplitTest{
 	// Gaps throughout
 	{u{33, 44, 1, 32, 45, 31}, uu{u{1}, u{31, 32, 33}, u{44, 45}}, true},
 	// Unsigned values spanning 0.
-	{u{m1, m0, m_1, m2, m_2}, uu{u{m0, m1, m2}, u{m_2, m_1}}, false},
+	{u{m1, m0, m1neg, m2, m2neg}, uu{u{m0, m1, m2}, u{m2neg, m1neg}}, false},
 	// Signed values spanning 0
-	{u{m1, m0, m_1, m2, m_2}, uu{u{m_2, m_1, m0, m1, m2}}, true},
+	{u{m1, m0, m1neg, m2, m2neg}, uu{u{m2neg, m1neg, m0, m1, m2}}, true},
 }
 
 func TestSplitIntoRuns(t *testing.T) {

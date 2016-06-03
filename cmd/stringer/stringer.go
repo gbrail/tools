@@ -170,6 +170,7 @@ type Generator struct {
 	pkg *Package     // Package we are scanning.
 }
 
+// Printf is a convenience method to print the contents of the Generator.
 func (g *Generator) Printf(format string, args ...interface{}) {
 	fmt.Fprintf(&g.buf, format, args...)
 }
@@ -183,6 +184,7 @@ type File struct {
 	values   []Value // Accumulator for constant values of that type.
 }
 
+// Package holds information about a package that is being processed.
 type Package struct {
 	dir      string
 	name     string

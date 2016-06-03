@@ -22,18 +22,18 @@ type Golden struct {
 }
 
 var golden = []Golden{
-	{"day", day_in, day_out},
-	{"offset", offset_in, offset_out},
-	{"gap", gap_in, gap_out},
-	{"num", num_in, num_out},
-	{"unum", unum_in, unum_out},
-	{"prime", prime_in, prime_out},
+	{"day", dayIn, dayOut},
+	{"offset", offsetIn, offsetOut},
+	{"gap", gapIn, gapOut},
+	{"num", numIn, numOut},
+	{"unum", unumIn, unumOut},
+	{"prime", primeIn, primeOut},
 }
 
 // Each example starts with "type XXX [u]int", with a single space separating them.
 
 // Simple test: enumeration of type int starting at 0.
-const day_in = `type Day int
+const dayIn = `type Day int
 const (
 	Monday Day = iota
 	Tuesday
@@ -45,7 +45,7 @@ const (
 )
 `
 
-const day_out = `
+const dayOut = `
 const _Dayname = "MondayTuesdayWednesdayThursdayFridaySaturdaySunday"
 
 var _Dayindex = [...]uint8{0, 6, 13, 22, 30, 36, 44, 50}
@@ -60,7 +60,7 @@ func (i Day) String() string {
 
 // Enumeration with an offset.
 // Also includes a duplicate.
-const offset_in = `type Number int
+const offsetIn = `type Number int
 const (
 	_ Number = iota
 	One
@@ -70,7 +70,7 @@ const (
 )
 `
 
-const offset_out = `
+const offsetOut = `
 const _Numbername = "OneTwoThree"
 
 var _Numberindex = [...]uint8{0, 3, 6, 11}
@@ -85,7 +85,7 @@ func (i Number) String() string {
 `
 
 // Gaps and an offset.
-const gap_in = `type Gap int
+const gapIn = `type Gap int
 const (
 	Two Gap = 2
 	Three Gap = 3
@@ -98,7 +98,7 @@ const (
 )
 `
 
-const gap_out = `
+const gapOut = `
 const (
 	_Gapname0 = "TwoThree"
 	_Gapname1 = "FiveSixSevenEightNine"
@@ -128,7 +128,7 @@ func (i Gap) String() string {
 `
 
 // Signed integers spanning zero.
-const num_in = `type Num int
+const numIn = `type Num int
 const (
 	m_2 Num = -2 + iota
 	m_1
@@ -138,7 +138,7 @@ const (
 )
 `
 
-const num_out = `
+const numOut = `
 const _Numname = "m_2m_1m0m1m2"
 
 var _Numindex = [...]uint8{0, 3, 6, 8, 10, 12}
@@ -153,7 +153,7 @@ func (i Num) String() string {
 `
 
 // Unsigned integers spanning zero.
-const unum_in = `type Unum uint
+const unumIn = `type Unum uint
 const (
 	m_2 Unum = iota + 253
 	m_1
@@ -166,7 +166,7 @@ const (
 )
 `
 
-const unum_out = `
+const unumOut = `
 const (
 	_Unumname0 = "m0m1m2"
 	_Unumname1 = "m_2m_1"
@@ -192,7 +192,7 @@ func (i Unum) String() string {
 
 // Enough gaps to trigger a map implementation of the method.
 // Also includes a duplicate to test that it doesn't cause problems
-const prime_in = `type Prime int
+const primeIn = `type Prime int
 const (
 	p2 Prime = 2
 	p3 Prime = 3
@@ -211,7 +211,7 @@ const (
 )
 `
 
-const prime_out = `
+const primeOut = `
 const _Primename = "p2p3p5p7p11p13p17p19p23p29p37p41p43"
 
 var _Primemap = map[Prime]string{
